@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -19,6 +20,7 @@ class Product extends Model
         'description',
         'price',
         'warranty',
+        'stock'
     ];
 
     /**
@@ -35,5 +37,15 @@ class Product extends Model
     public function manufacturer(): BelongsTo
     {
         return $this->belongsTo(Manufacturer::class);
+    }
+
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function($model){
+            $model->slug = time() . '_' . Str::slug($model->name);
+        });
     }
 }

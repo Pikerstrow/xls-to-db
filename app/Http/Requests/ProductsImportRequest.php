@@ -25,7 +25,7 @@ class ProductsImportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file' => ['required', 'file', 'mimes:xls,xlsx', new MaxFileSize()]
+            'file' => ['required', 'file', 'mimes:xlsx', new MaxFileSize()]
         ];
     }
 
@@ -38,7 +38,7 @@ class ProductsImportRequest extends FormRequest
         return [
             'required' => "Ви не вибрали файл",
             'file'     => "Передане значення повинне бути файлом",
-            'mimes'    => "Приймаються лише Excel файли",
+            'mimes'    => "Приймаються лише Excel файли, з розширенням '.xlsx'",
         ];
     }
 }
