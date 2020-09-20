@@ -66,7 +66,7 @@ class ProductsImport implements WithChunkReading, WithStartRow, OnEachRow
                     'stock' => $this->stock_statuses[$this->offset_rows ? $row[10] : $row[9]]
                 ]
             );
-            $product->save();
+            $product->save(); //Can be replaced with static method updateOrCreate if there is necessity to update existing products.
             $this->success_rows_counter++;
         }
     }
